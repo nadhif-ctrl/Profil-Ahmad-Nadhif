@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="id" x-data="app()" :class="{'dark':dark}" class="scroll-smooth">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Ahmad Nadhif — lulusan TJKT SMKN 1 Kota Bengkulu, mahasiswa Sistem Informasi Universitas Muhammadiyah Bengkulu. Berpengalaman di jaringan MikroTik dan instalasi CCTV.">
+<meta name="author" content="Ahmad Nadhif">
+<meta property="og:title" content="Ahmad Nadhif — Portofolio">
+<meta property="og:description" content="Jaringan MikroTik, instalasi CCTV, dan mahasiswa Sistem Informasi UM Bengkulu.">
+<meta property="og:type" content="website">
+<title>Ahmad Nadhif — Portofolio</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+
+<script>
+tailwind.config = {
+  darkMode: 'class',
+  theme: { extend: {
+    fontFamily: { display: ['PT Sans','sans-serif'], body: ['DM Sans','sans-serif'] },
+    colors: { accent: '#FF6B2B', 'accent-light': '#FF8F5C' }
+  } }
+}
+</script>
+
+<style>
+*,*::before,*::after{box-sizing:border-box}
+html,body{font-family:'DM Sans',sans-serif}
+h1,h2,h3,h4,h5,h6{font-family:'PT Sans',sans-serif}
+body{transition:background-color .3s,color .3s}
+
+/* noise overlay */
+body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.35;
+background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.05'/%3E%3C/svg%3E")}
+
+/* scrollbar */
+::-webkit-scrollbar{width:5px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:#FF6B2B;border-radius:99px}
+
+/* reveal on scroll */
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .6s cubic-bezier(.4,0,.2,1),transform .6s cubic-bezier(.4,0,.2,1)}
+.reveal.in{opacity:1;transform:none}
+.d1{transition-delay:.08s}.d2{transition-delay:.16s}.d3{transition-delay:.24s}.d4{transition-delay:.32s}
+
+/* nav underline animation */
+.nl{position:relative}
+.nl::after{content:'';position:absolute;bottom:-2px;left:0;width:0;height:1.5px;background:currentColor;transition:width .22s cubic-bezier(.4,0,.2,1)}
+.nl:hover::after,.nl.on::after{width:100%}
+.nl.on{font-weight:500}
+
+/* shimmer button */
+.shimmer{position:relative;overflow:hidden}
+.shimmer::after{content:'';position:absolute;top:0;left:-100%;width:60%;height:100%;background:rgba(255,255,255,.18);transform:skewX(-20deg);transition:left .4s cubic-bezier(.4,0,.2,1)}
+.shimmer:hover::after{left:160%}
+
+/* photo frames */
+.pf{overflow:hidden;background:#d4d4d8;position:relative}
+.pf.noimg{background:linear-gradient(135deg,#fed7aa,#d4d4d8)}
+.pf.noimg::after{content:attr(data-label);position:absolute;inset:0;display:flex;align-items:center;justify-content:center;text-align:center;padding:1rem;font-size:.8rem;color:#52525b}
+.pf img{width:100%;height:100%;object-fit:cover;display:block}
+
+/* card hover */
+.card-h{transition:transform .28s cubic-bezier(.4,0,.2,1),border-color .18s}
+.card-h:hover{transform:translateY(-4px)}
+
+/* skill tag */
+.stag{transition:border-color .18s}
+.song-player iframe{border:0;display:block;width:100%;height:100%}\n#local-audio-player{width:100%;accent-color:#f97316}\n#local-audio-player::-webkit-media-controls-panel{background:#f4f4f5}
+
+[x-cloak]{display:none!important}
+
+/* ===== Visual refresh: editorial portfolio ===== */
+:root{--portfolio-accent:#f97316;--portfolio-ink:#111827;--portfolio-line:rgba(148,163,184,.18)}
+html{scroll-padding-top:88px;scroll-behavior:smooth}
+body{background:#fafaf9;letter-spacing:-.012em}
+body::before{opacity:.18}
+main{position:relative;isolation:isolate}
+section{scroll-margin-top:78px}
+header{border-bottom:1px solid transparent}
+header:has(nav) {transition:background .3s,border-color .3s,box-shadow .3s}
+header[ class ]{backdrop-filter:saturate(160%)}
+header nav{max-width:1200px!important;height:76px!important}
+header nav>a:first-child{font-size:1.45rem;letter-spacing:-.08em}
+header nav ul{gap:1.65rem!important}
+header nav ul a{font-size:.78rem!important;font-weight:600;letter-spacing:.015em}
+header nav>div>a{box-shadow:0 8px 22px rgba(249,115,22,.22)}
+
+/* Warm neutral canvas and section rhythm */
+#hero{min-height:780px;background:radial-gradient(ellipse at 82% 24%,rgba(249,115,22,.11),transparent 34%),linear-gradient(180deg,#fff 0%,#fafaf9 100%)}
+#hero:after{content:"";position:absolute;inset:0;pointer-events:none;opacity:.28;background-image:linear-gradient(rgba(100,116,139,.10) 1px,transparent 1px),linear-gradient(90deg,rgba(100,116,139,.10) 1px,transparent 1px);background-size:54px 54px;mask-image:linear-gradient(to bottom,black,transparent 85%)}
+#hero>.relative{max-width:1200px}
+#hero h1{font-size:clamp(3.2rem,6vw,5.6rem);letter-spacing:-.065em;line-height:.99}
+#hero h1 span{background:linear-gradient(115deg,#f97316,#fb923c 55%,#ea580c);-webkit-background-clip:text;background-clip:text;color:transparent}
+#hero .pf{border-radius:2rem!important;border:10px solid rgba(255,255,255,.78);box-shadow:0 28px 80px rgba(15,23,42,.18),0 0 0 1px rgba(148,163,184,.18);transform:rotate(2deg);transition:transform .5s}
+#hero .pf:hover{transform:rotate(0) translateY(-5px)}
+#hero .pf:before{content:"";position:absolute;inset:0;border-radius:inherit;z-index:1;box-shadow:inset 0 0 0 1px rgba(255,255,255,.28);pointer-events:none}
+#hero .reveal:nth-child(1){letter-spacing:.16em}
+#hero .reveal.d4>div{min-width:100px}
+#hero .reveal.d4 p:first-child{letter-spacing:-.05em}
+
+section:not(#hero){padding-top:clamp(4.5rem,8vw,7rem)!important;padding-bottom:clamp(4.5rem,8vw,7rem)!important}
+section:not(#hero)>.max-w-6xl{max-width:1200px}
+section h2{letter-spacing:-.055em!important;line-height:1.05}
+section .mb-14{margin-bottom:3rem!important}
+section .mb-14>p:first-child,section .mb-10>p:first-child{letter-spacing:.18em;font-size:.68rem}
+#keahlian,#tentang,#favorite{background:#f2f1ee!important}
+#pengalaman,#pendidikan,#game{background:#fafaf9}
+
+/* Cards */
+.card-h{border-radius:1.35rem!important;box-shadow:0 8px 30px rgba(15,23,42,.035);transition:transform .35s cubic-bezier(.2,.8,.2,1),box-shadow .35s,border-color .25s}
+.card-h:hover{transform:translateY(-7px);box-shadow:0 20px 45px rgba(15,23,42,.10)}
+#keahlian article{min-height:275px;padding:2rem!important;border-color:rgba(148,163,184,.22)!important}
+#keahlian article:nth-child(2){background:#171923!important;border-color:#171923!important}
+#keahlian article>div:first-child{border-radius:1rem}
+#pengalaman article{border-radius:1.35rem!important;box-shadow:0 10px 35px rgba(15,23,42,.06)}
+#pengalaman article .pf img{transition:transform .7s cubic-bezier(.2,.8,.2,1)}
+#pengalaman article:hover .pf img{transform:scale(1.045)}
+#pendidikan article{border-radius:1.35rem!important;padding:2rem!important;box-shadow:0 10px 30px rgba(15,23,42,.045)}
+#pendidikan article:nth-child(2){background:linear-gradient(145deg,#202431,#111827)!important}
+#tentang .pf{border-radius:1.8rem!important;box-shadow:18px 18px 0 rgba(249,115,22,.13),0 25px 55px rgba(15,23,42,.12)}
+#tentang .pf img{transition:transform .6s}
+#tentang .pf:hover img{transform:scale(1.035)}
+
+/* Game gallery */
+#favorite>.max-w-6xl>.grid>div{border-radius:1.6rem!important;box-shadow:0 18px 50px rgba(15,23,42,.14)}
+#favorite figure .pf{border-radius:1rem!important;overflow:hidden}
+#favorite figure img{transition:transform .55s}
+#game figure:hover img{transform:scale(1.07)}
+#favorite figcaption{font-weight:600;color:#d4d4d8!important;margin-top:.7rem!important}
+
+/* Music player */
+#favorite .reveal.bg-zinc-900{background:linear-gradient(125deg,#171923 0%,#252b3a 100%)!important;border:1px solid rgba(255,255,255,.08);box-shadow:0 24px 65px rgba(15,23,42,.17)!important;padding:2rem!important}
+#now-playing-image{border:1px solid rgba(255,255,255,.12);box-shadow:0 12px 30px rgba(0,0,0,.25)}
+#local-audio-player{accent-color:#fb923c;height:42px}
+#prev-song,#next-song{border-radius:999px!important;padding:.65rem 1.1rem!important;transition:all .2s}
+#prev-song:hover,#next-song:hover{background:#f97316;border-color:#f97316;color:white}
+#song-list .song-card{border-radius:1.15rem!important;padding:1rem!important;box-shadow:0 7px 24px rgba(15,23,42,.045);transition:transform .25s,box-shadow .25s,border-color .25s}
+#song-list .song-card:hover{transform:translateY(-4px);box-shadow:0 16px 35px rgba(15,23,42,.10)}
+#song-list .song-card>div:first-child{border-radius:.9rem!important}
+
+/* Contact */
+#kontak>.max-w-6xl>div{border-radius:1.8rem!important;background:linear-gradient(125deg,#171923 0%,#202839 100%)!important;box-shadow:0 25px 70px rgba(15,23,42,.17);padding:clamp(2rem,5vw,4.5rem)!important}
+#kontak input,#kontak textarea{border-radius:.9rem!important;background:rgba(255,255,255,.07)!important;border-color:rgba(255,255,255,.13)!important}
+#kontak input:focus,#kontak textarea:focus{background:rgba(255,255,255,.1)!important}
+#kontak [data-link]{padding:.25rem 0}
+#kontak [data-link]>span:first-child{width:2.7rem;height:2.7rem;border:1px solid rgba(255,255,255,.1);border-radius:.85rem;background:rgba(255,255,255,.07)!important}
+#kontak button[type=submit]{border-radius:999px!important;padding:.9rem 1.5rem!important;box-shadow:0 8px 22px rgba(249,115,22,.2)}
+
+/* Footer and small screens */
+footer{border-top:1px solid rgba(148,163,184,.16)}
+@media(max-width:767px){
+ header nav{height:66px!important}
+ #hero{min-height:auto}
+ #hero>.relative{padding-top:7rem!important;padding-bottom:5rem!important}
+ #hero .grid{gap:3rem!important}
+ #hero h1{font-size:clamp(3rem,13vw,4.2rem)}
+ #hero .pf{max-width:290px;max-height:290px;border-width:7px}
+ #hero .reveal.d4{gap:1.2rem!important;flex-wrap:wrap}
+ #hero .reveal.d4 p:first-child{font-size:1.8rem}
+ section:not(#hero){padding-top:4.5rem!important;padding-bottom:4.5rem!important}
+ #keahlian article{min-height:0}
+ #favorite .reveal.bg-zinc-900{padding:1.25rem!important}
+ #kontak>.max-w-6xl>div{padding:1.6rem!important}
+}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition-duration:.01ms!important;animation-duration:.01ms!important}}
+html.dark body{background:#09090b}
+html.dark #hero{background:radial-gradient(ellipse at 82% 24%,rgba(249,115,22,.13),transparent 34%),linear-gradient(180deg,#101116 0%,#09090b 100%)}
+html.dark #hero:after{opacity:.13}
+html.dark #keahlian,html.dark #tentang,html.dark #favorite{background:#111318!important}
+html.dark #pengalaman,html.dark #pendidikan,html.dark #game{background:#09090b}
+html.dark #keahlian article:not(:nth-child(2)),html.dark #pendidikan article:not(:nth-child(2)){background:#15171d!important;border-color:#292d36!important}
+html.dark .card-h{box-shadow:0 8px 30px rgba(0,0,0,.15)}
+html.dark #song-list .song-card{background:#191c24!important;border-color:#303541!important}
+
+</style>
+</head>
+
+<body class="bg-white dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100 antialiased">
+
+<header class="fixed inset-x-0 top-0 z-50 transition-all duration-300"
+  :class="sc?'bg-white/90 dark:bg-zinc-950/90 backdrop-blur-md shadow-sm shadow-black/5':''">
+  <nav class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between" aria-label="Navigasi utama">
+    <a href="#hero" class="font-display font-bold text-xl tracking-tight relative z-10"><span class="text-zinc-900 dark:text-white">nad</span><span class="text-accent">hif</span></a>
+    <ul class="hidden md:flex items-center gap-8 text-sm" role="list">
+      <li><a href="#keahlian" class="nl text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors" :class="s==='keahlian'?'on !text-zinc-900 dark:!text-white':''">Keahlian</a></li>
+      <li><a href="#pengalaman" class="nl text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors" :class="s==='pengalaman'?'on !text-zinc-900 dark:!text-white':''">Pengalaman</a></li>
+      <li><a href="#tentang" class="nl text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors" :class="s==='tentang'?'on !text-zinc-900 dark:!text-white':''">Tentang</a></li>
+      <li><a href="#pendidikan" class="nl text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors" :class="s==='pendidikan'?'on !text-zinc-900 dark:!text-white':''">Pendidikan</a></li>
+      <li><a href="#favorite" class="nl text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors" :class="s==='favorite'?'on !text-zinc-900 dark:!text-white':''">Favorite</a></li>
+      <li><a href="#kontak" class="nl text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors" :class="s==='kontak'?'on !text-zinc-900 dark:!text-white':''">Kontak</a></li>
+    </ul>
+    <div class="flex items-center gap-3">
+      <button @click="dark=!dark" class="w-9 h-9 flex items-center justify-center rounded-full border border-zinc-200 dark:border-zinc-800 hover:bg-zinc-100 dark:hover:bg-zinc-900 transition-colors" :aria-label="dark?'Mode terang':'Mode gelap'">
+        <svg x-show="!dark" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+        <svg x-show="dark" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707M17.657 17.657l-.707-.707M6.343 6.343l-.707-.707M12 8a4 4 0 100 8 4 4 0 000-8z"/></svg>
+      </button>
+      <a href="#kontak" class="hidden md:inline-flex items-center gap-2 shimmer bg-accent text-white text-sm font-medium px-5 py-2 rounded-full hover:bg-accent-light transition-colors">Hubungi saya</a>
+      <button @click="mm=!mm" class="md:hidden w-9 h-9 flex items-center justify-center rounded-full border border-zinc-200 dark:border-zinc-800" :aria-expanded="mm" aria-label="Buka menu">
+        <svg x-show="!mm" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+        <svg x-show="mm" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+      </button>
+    </div>
+  </nav>
+  <div x-show="mm" x-cloak x-transition class="md:hidden bg-white dark:bg-zinc-950 border-t border-zinc-100 dark:border-zinc-900">
+    <ul class="flex flex-col px-6 py-5 gap-4 text-sm font-medium" role="list">
+      <li><a href="#keahlian" @click="mm=false" class="block text-zinc-700 dark:text-zinc-300 hover:text-accent transition-colors">Keahlian</a></li>
+      <li><a href="#pengalaman" @click="mm=false" class="block text-zinc-700 dark:text-zinc-300 hover:text-accent transition-colors">Pengalaman</a></li>
+      <li><a href="#tentang" @click="mm=false" class="block text-zinc-700 dark:text-zinc-300 hover:text-accent transition-colors">Tentang</a></li>
+      <li><a href="#pendidikan" @click="mm=false" class="block text-zinc-700 dark:text-zinc-300 hover:text-accent transition-colors">Pendidikan</a></li>
+      <li><a href="#favorite" @click="mm=false" class="block text-zinc-700 dark:text-zinc-300 hover:text-accent transition-colors">Favorite</a></li>
+      <li><a href="#kontak" @click="mm=false" class="block text-zinc-700 dark:text-zinc-300 hover:text-accent transition-colors">Kontak</a></li>
+    </ul>
+  </div>
+</header>
+
+<main>
+
+<section id="hero" class="relative min-h-screen flex items-center pt-16 overflow-hidden">
+  <div class="absolute top-1/4 right-0 w-96 h-96 bg-accent/10 rounded-full blur-3xl pointer-events-none" aria-hidden="true"></div>
+  <div class="relative z-10 max-w-6xl mx-auto px-6 py-24 w-full">
+    <div class="grid md:grid-cols-2 gap-12 items-center">
+      <div>
+        <p class="reveal text-sm font-medium text-accent tracking-widest uppercase mb-4">Mahasiswa Sistem Informasi</p>
+        <h1 class="reveal d1 font-display font-bold text-5xl md:text-6xl lg:text-7xl leading-[1.05] tracking-tight text-zinc-900 dark:text-white mb-6">Halo, saya <span class="text-accent">Ahmad Nadhif</span></h1>
+        <p class="reveal d2 text-lg md:text-xl text-zinc-500 dark:text-zinc-400 font-light leading-relaxed max-w-md mb-10">Lulusan <strong class="font-medium text-zinc-700 dark:text-zinc-300">TJKT SMKN 1 Kota Bengkulu</strong> dengan pengalaman konfigurasi jaringan MikroTik dan instalasi CCTV. Kini belajar Sistem Informasi di Universitas Muhammadiyah Bengkulu.</p>
+        <div class="reveal d3 flex flex-wrap gap-4">
+          <a href="#pengalaman" class="shimmer inline-flex items-center gap-2 bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 font-medium px-7 py-3.5 rounded-full hover:bg-zinc-700 dark:hover:bg-zinc-200 transition-colors text-sm">Lihat pengalaman</a>
+          <a href="#kontak" class="inline-flex items-center gap-2 border border-zinc-300 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 font-medium px-7 py-3.5 rounded-full hover:bg-zinc-50 dark:hover:bg-zinc-900 transition-colors text-sm">Hubungi saya</a>
+        </div>
+        <div class="reveal d4 flex gap-8 mt-14 pt-8 border-t border-zinc-100 dark:border-zinc-900">
+          <div><p class="font-display font-bold text-3xl text-zinc-900 dark:text-white">4+ bln</p><p class="text-xs text-zinc-500 dark:text-zinc-400 mt-1">PKL di Aranus Technology</p></div>
+          <div><p class="font-display font-bold text-3xl text-zinc-900 dark:text-white">TJKT</p><p class="text-xs text-zinc-500 dark:text-zinc-400 mt-1">Jurusan di SMKN 1</p></div>
+          <div><p class="font-display font-bold text-3xl text-zinc-900 dark:text-white">Sem 1</p><p class="text-xs text-zinc-500 dark:text-zinc-400 mt-1">Sistem Informasi</p></div>
+        </div>
+      </div>
+      <div class="reveal d2 flex justify-center md:justify-end">
+        <div class="relative w-72 h-72 md:w-80 md:h-80 lg:w-96 lg:h-96">
+          <div class="pf w-full h-full rounded-3xl" data-label="Tambahkan foto: foto/foto-profil.jpg"><img src="foto/foto lulusan.png" alt="Foto Ahmad Nadhif" loading="eager" onerror="this.parentElement.classList.add('noimg');this.remove()"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="keahlian" class="py-24 bg-zinc-50 dark:bg-zinc-900/40">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="mb-14">
+      <p class="reveal text-xs font-medium text-accent tracking-widest uppercase mb-3">Yang saya kuasai</p>
+      <h2 class="reveal d1 font-display font-bold text-4xl md:text-5xl text-zinc-900 dark:text-white">Keahlian</h2>
+    </div>
+    <div class="grid md:grid-cols-3 gap-6">
+      <article class="reveal d1 card-h group bg-white dark:bg-zinc-900 rounded-2xl p-8 border border-zinc-100 dark:border-zinc-800 hover:border-accent">
+        <div class="w-12 h-12 flex items-center justify-center bg-orange-50 dark:bg-zinc-800 rounded-xl mb-6 group-hover:bg-accent/10 transition-colors"><svg class="w-6 h-6 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01"/></svg></div>
+        <h3 class="font-display font-bold text-xl text-zinc-900 dark:text-white mb-3">Jaringan MikroTik</h3>
+        <p class="text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed">Konfigurasi router MikroTik RB750Gr3 (hEX): IP Address, DHCP Server, NAT, firewall, manajemen bandwidth, hingga hotspot dengan halaman login.</p>
+      </article>
+      <article class="reveal d2 card-h group bg-zinc-900 dark:bg-zinc-800 rounded-2xl p-8 border border-zinc-800 hover:border-accent">
+        <div class="w-12 h-12 flex items-center justify-center bg-zinc-800 dark:bg-zinc-700 rounded-xl mb-6 group-hover:bg-accent/20 transition-colors"><svg class="w-6 h-6 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg></div>
+        <h3 class="font-display font-bold text-xl text-white mb-3">Instalasi &amp; Maintenance CCTV</h3>
+        <p class="text-sm text-zinc-400 leading-relaxed">Memasang dan mengatur CCTV EZVIZ, Hikvision, dan Dahua, termasuk DVR/NVR dan pemantauan dari smartphone. Juga memeriksa dan memperbaiki gangguan sistem.</p>
+      </article>
+      <article class="reveal d3 card-h group bg-white dark:bg-zinc-900 rounded-2xl p-8 border border-zinc-100 dark:border-zinc-800 hover:border-accent">
+        <div class="w-12 h-12 flex items-center justify-center bg-orange-50 dark:bg-zinc-800 rounded-xl mb-6 group-hover:bg-accent/10 transition-colors"><svg class="w-6 h-6 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.111 16.404a5.5 5.5 0 017.778 0M12 20h.01m-7.08-7.071c3.904-3.905 10.236-3.905 14.141 0M1.394 9.393c5.857-5.857 15.355-5.857 21.213 0"/></svg></div>
+        <h3 class="font-display font-bold text-xl text-zinc-900 dark:text-white mb-3">Instalasi Jaringan</h3>
+        <p class="text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed">Penarikan kabel UTP dan Coaxial, pengaturan router dan access point untuk kebutuhan klien perusahaan.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="pengalaman" class="py-24">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="mb-14">
+      <p class="reveal text-xs font-medium text-accent tracking-widest uppercase mb-3">Praktik Kerja Lapangan</p>
+      <h2 class="reveal d1 font-display font-bold text-4xl md:text-5xl text-zinc-900 dark:text-white">Pengalaman</h2>
+    </div>
+    <div class="grid md:grid-cols-2 gap-6">
+
+      <article class="card-h reveal d1 group rounded-2xl overflow-hidden bg-zinc-100 dark:bg-zinc-900 border border-zinc-100 dark:border-zinc-800 hover:border-accent md:row-span-2">
+        <div class="pf w-full h-64 md:h-80" data-label="Tambahkan foto: foto/pkl-1.jpg"><img src="foto/Aranus%20Technology.webp" alt="Dokumentasi PKL di CV. Aranus Technology" loading="lazy" onerror="this.parentElement.classList.add('noimg');this.remove()"></div>
+        <div class="p-7">
+          <div class="flex flex-wrap gap-2 mb-4"><span class="text-xs bg-orange-50 dark:bg-zinc-800 text-accent border border-orange-200 dark:border-zinc-700 px-3 py-1 rounded-full">20 Nov 2025 – 31 Mar 2026</span><span class="text-xs bg-zinc-200 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 px-3 py-1 rounded-full">Bengkulu</span></div>
+          <h3 class="font-display font-bold text-2xl text-zinc-900 dark:text-white mb-2">Peserta PKL — CV. Aranus Technology</h3>
+          <p class="text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed mb-4">Aranus Technology bergerak di bidang pengembangan perangkat lunak dan sistem keamanan, termasuk instalasi CCTV, pembuatan landing page, dan SEO. Selama PKL jurusan TJKT, saya mengerjakan:</p>
+          <ul class="text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed list-disc pl-5 space-y-1.5">
+            <li>Survei lokasi, pemasangan, dan pengaturan CCTV EZVIZ lewat aplikasi (deteksi manusia/kendaraan, notifikasi gerak, night vision, akses jarak jauh).</li>
+            <li>Perawatan CCTV: cek power supply dengan multimeter, kabel, konektor BNC/RJ45, DVR/NVR, dan hard disk.</li>
+            <li>Konfigurasi MikroTik RB750Gr3 (hEX) dan penarikan kabel UTP/Coaxial untuk klien.</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="card-h reveal d2 group rounded-2xl overflow-hidden bg-zinc-100 dark:bg-zinc-900 border border-zinc-100 dark:border-zinc-800 hover:border-accent">
+        <div class="pf w-full h-48" data-label="Tambahkan foto: foto/pkl-2.jpg"><img src="foto/Mikrotik.jpg" alt="Konfigurasi jaringan MikroTik" loading="lazy" onerror="this.parentElement.classList.add('noimg');this.remove()"></div>
+        <div class="p-6">
+          <div class="flex flex-wrap gap-2 mb-3"><span class="text-xs bg-orange-50 dark:bg-zinc-800 text-accent border border-orange-200 dark:border-zinc-700 px-3 py-1 rounded-full">MikroTik</span><span class="text-xs bg-zinc-200 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 px-3 py-1 rounded-full">Jaringan</span></div>
+          <h3 class="font-display font-bold text-xl text-zinc-900 dark:text-white mb-1.5">Konfigurasi MikroTik hEX</h3>
+          <p class="text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed">Mengatur IP Address, DHCP Server, NAT, firewall, Simple Queue untuk pembagian bandwidth, serta hotspot dengan halaman login.</p>
+        </div>
+      </article>
+
+      <article class="card-h reveal d3 group rounded-2xl overflow-hidden bg-zinc-100 dark:bg-zinc-900 border border-zinc-100 dark:border-zinc-800 hover:border-accent">
+        <div class="pf w-full h-48" data-label="Tambahkan foto: foto/pkl-3.jpg"><img src="foto/instalasi cctv.jpeg" alt="Instalasi CCTV" loading="lazy" onerror="this.parentElement.classList.add('noimg');this.remove()"></div>
+        <div class="p-6">
+          <div class="flex flex-wrap gap-2 mb-3"><span class="text-xs bg-orange-50 dark:bg-zinc-800 text-accent border border-orange-200 dark:border-zinc-700 px-3 py-1 rounded-full">CCTV</span><span class="text-xs bg-zinc-200 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 px-3 py-1 rounded-full">Hikvision</span><span class="text-xs bg-zinc-200 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 px-3 py-1 rounded-full">Dahua</span></div>
+          <h3 class="font-display font-bold text-xl text-zinc-900 dark:text-white mb-1.5">Instalasi CCTV</h3>
+          <p class="text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed">Pemasangan bracket, penarikan kabel, konfigurasi DVR/NVR, dan pemantauan jarak jauh lewat smartphone.</p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="tentang" class="py-24 bg-zinc-50 dark:bg-zinc-900/40">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="grid md:grid-cols-2 gap-16 items-center">
+      <div class="reveal order-2 md:order-1">
+        <div class="pf w-full aspect-square max-w-sm mx-auto rounded-3xl" data-label="Tambahkan foto: foto/foto-profil.jpg"><img src="foto/foto saya.png" alt="Ahmad Nadhif" loading="lazy" onerror="this.parentElement.classList.add('noimg');this.remove()"></div>
+      </div>
+      <div class="order-1 md:order-2">
+        <p class="reveal text-xs font-medium text-accent tracking-widest uppercase mb-3">Tentang saya</p>
+        <h2 class="reveal d1 font-display font-bold text-4xl md:text-5xl text-zinc-900 dark:text-white leading-tight mb-6">Sedikit tentang<br>saya</h2>
+        <p class="reveal d2 text-zinc-500 dark:text-zinc-400 leading-relaxed mb-4">Saya Ahmad Nadhif, lulusan Teknik Jaringan Komputer dan Telekomunikasi SMKN 1 Kota Bengkulu. Lewat PKL di CV. Aranus Technology, saya terjun langsung mengerjakan jaringan dan CCTV untuk klien.</p>
+        <p class="reveal d3 text-zinc-500 dark:text-zinc-400 leading-relaxed mb-8">Sekarang saya kuliah Sistem Informasi semester 1 di Universitas Muhammadiyah Bengkulu untuk memperluas dasar jaringan ke pengembangan sistem. Saat bekerja, saya aktif bertanya, mencatat setiap materi, dan memeriksa konfigurasi secara bertahap.</p>
+        <div class="reveal d4">
+          <p class="text-xs font-medium text-zinc-500 dark:text-zinc-400 tracking-widest uppercase mb-3">Teknologi &amp; perangkat</p>
+          <div class="flex flex-wrap gap-2" role="list" aria-label="Keahlian">
+            <span role="listitem" class="stag text-sm bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 px-3.5 py-1.5 rounded-full hover:border-accent">MikroTik RB750Gr3 (hEX)</span><span role="listitem" class="stag text-sm bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 px-3.5 py-1.5 rounded-full hover:border-accent">IP Address &amp; DHCP Server</span><span role="listitem" class="stag text-sm bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 px-3.5 py-1.5 rounded-full hover:border-accent">NAT &amp; Firewall</span><span role="listitem" class="stag text-sm bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 px-3.5 py-1.5 rounded-full hover:border-accent">Bandwidth (Simple Queue)</span><span role="listitem" class="stag text-sm bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 px-3.5 py-1.5 rounded-full hover:border-accent">Hotspot &amp; Login Page</span><span role="listitem" class="stag text-sm bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 px-3.5 py-1.5 rounded-full hover:border-accent">CCTV Hikvision &amp; Dahua</span><span role="listitem" class="stag text-sm bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 px-3.5 py-1.5 rounded-full hover:border-accent">CCTV EZVIZ</span><span role="listitem" class="stag text-sm bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 px-3.5 py-1.5 rounded-full hover:border-accent">DVR / NVR</span><span role="listitem" class="stag text-sm bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 px-3.5 py-1.5 rounded-full hover:border-accent">Kabel UTP &amp; Coaxial</span><span role="listitem" class="stag text-sm bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 px-3.5 py-1.5 rounded-full hover:border-accent">Access Point</span><span role="listitem" class="stag text-sm bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 px-3.5 py-1.5 rounded-full hover:border-accent">Troubleshooting jaringan</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="pendidikan" class="py-24">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="mb-14">
+      <p class="reveal text-xs font-medium text-accent tracking-widest uppercase mb-3">Riwayat belajar</p>
+      <h2 class="reveal d1 font-display font-bold text-4xl md:text-5xl text-zinc-900 dark:text-white">Pendidikan</h2>
+    </div>
+    <div class="grid md:grid-cols-3 gap-6">
+      <article class="reveal d1 bg-zinc-50 dark:bg-zinc-900 border border-zinc-100 dark:border-zinc-800 rounded-2xl p-7">
+        <p class="text-xs font-medium text-accent mb-3">Sekarang · Semester 1</p>
+        <h3 class="font-display font-bold text-xl text-zinc-900 dark:text-white mb-1">Universitas Muhammadiyah Bengkulu</h3>
+        <p class="text-sm font-medium text-zinc-600 dark:text-zinc-400 mb-4">S1 Sistem Informasi</p>
+        <p class="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">Mempelajari dasar sistem informasi sebagai lanjutan dari bekal jaringan di SMK.</p>
+      </article>
+      <article class="reveal d2 bg-white dark:bg-zinc-900 border border-zinc-100 dark:border-zinc-800 rounded-2xl p-7">
+        <p class="text-xs font-medium text-accent mb-3">Sekolah Dasar</p>
+        <h3 class="font-display font-bold text-xl text-zinc-900 dark:text-white mb-1">SDN 1 Kota Bengkulu</h3>
+        <p class="text-sm font-medium text-zinc-600 dark:text-zinc-400 mb-4">Pendidikan Dasar</p>
+        <p class="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">Menempuh pendidikan sekolah dasar di SDN 1 Kota Bengkulu.</p>
+      </article>
+
+      <article class="reveal d3 bg-zinc-900 dark:bg-zinc-800 border border-zinc-800 rounded-2xl p-7">
+        <p class="text-xs font-medium text-accent mb-3">Sekolah Menengah Pertama</p>
+        <h3 class="font-display font-bold text-xl text-white mb-1">SMPN 13 Kota Bengkulu</h3>
+        <p class="text-sm font-medium text-zinc-400 mb-4">Pendidikan Menengah Pertama</p>
+        <p class="text-sm text-zinc-400 leading-relaxed">Menempuh pendidikan sekolah menengah pertama di SMPN 13 Kota Bengkulu.</p>
+      </article>
+
+      <article class="reveal d4 bg-zinc-50 dark:bg-zinc-900 border border-zinc-100 dark:border-zinc-800 rounded-2xl p-7">
+        <p class="text-xs font-medium text-accent mb-3">Lulus 2026</p>
+        <h3 class="font-display font-bold text-xl text-zinc-900 dark:text-white mb-1">SMKN 1 Kota Bengkulu</h3>
+        <p class="text-sm font-medium text-zinc-600 dark:text-zinc-400 mb-4">Teknik Jaringan Komputer dan Telekomunikasi (TJKT)</p>
+        <p class="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">Belajar jaringan dan telekomunikasi, lalu PKL di CV. Aranus Technology selama sekitar empat bulan.</p>
+      </article>
+      <article class="reveal d3 bg-zinc-50 dark:bg-zinc-900 border border-zinc-100 dark:border-zinc-800 rounded-2xl p-7">
+        <p class="text-xs font-medium text-accent mb-3">PKL 2025 – 2026</p>
+        <h3 class="font-display font-bold text-xl text-zinc-900 dark:text-white mb-1">Sikap kerja dari PKL</h3>
+        <p class="text-sm font-medium text-zinc-600 dark:text-zinc-400 mb-4">Yang saya bawa dari dunia kerja</p>
+        <p class="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">Disiplin, tanggung jawab, komunikasi, kerja sama tim, dan kemampuan beradaptasi dengan lingkungan kerja profesional.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="favorite" class="py-24">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="mb-14">
+      <p class="reveal text-xs font-medium text-accent tracking-widest uppercase mb-3">Di luar kerja</p>
+      <h2 class="reveal d1 font-display font-bold text-4xl md:text-5xl text-zinc-900 dark:text-white">Favorite</h2>
+      <p class="reveal d2 text-sm text-zinc-500 dark:text-zinc-400 mt-3">Game dan lagu yang saya sukai.</p>
+    </div>
+
+    <div class="grid lg:grid-cols-2 gap-6">
+      <!-- Game favorit -->
+      <div class="reveal bg-zinc-900 dark:bg-zinc-800 rounded-3xl p-7">
+        <p class="font-display font-bold text-white">Game favorit</p>
+        <div class="flex gap-5 mt-4 items-center">
+          <div class="w-28 shrink-0">
+            <div class="pf aspect-[3/4] rounded-xl" data-label="Dying Light">
+              <img src="foto/Dying_Light.jpg" alt="Dying Light" loading="lazy" onerror="this.parentElement.classList.add('noimg');this.remove()">
+            </div>
+          </div>
+          <div>
+            <h3 class="font-display font-bold text-xl text-white mb-1">Dying Light</h3>
+            <p class="text-sm italic text-zinc-400 mb-3">Game yang paling saya suka.</p>
+            <div class="flex flex-wrap gap-2">
+              <span class="text-xs bg-orange-50 dark:bg-zinc-800 text-accent border border-orange-200 dark:border-zinc-700 px-3 py-1 rounded-full">Suka banget</span>
+              <span class="text-xs bg-zinc-200 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 px-3 py-1 rounded-full">Mahir</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Lagu favorit -->
+      <div class="reveal d1 bg-zinc-900 dark:bg-black rounded-3xl p-5 md:p-7 shadow-xl">
+        <div class="flex flex-col gap-5">
+          <div class="flex items-center gap-4">
+            <div class="w-20 h-20 shrink-0 rounded-2xl overflow-hidden bg-zinc-800">
+              <img id="now-playing-image" src="https://img.youtube.com/vi/BBpIV9A1PXc/hqdefault.jpg" alt="Cover lagu yang sedang diputar" class="w-full h-full object-cover">
+            </div>
+            <div class="min-w-0">
+              <p class="text-xs uppercase tracking-widest text-accent mb-2">Lagu favorit</p>
+              <h3 id="now-playing-title" class="font-display font-bold text-lg text-white">Pilih lagu favorit</h3>
+              <p id="now-playing-artist" class="text-sm text-zinc-400 mt-1">Pemutar musik</p>
+            </div>
+          </div>
+          <audio id="local-audio-player" class="w-full" controls preload="metadata">
+            Browser Anda belum mendukung pemutar audio.
+          </audio>
+          <div class="flex items-center justify-between">
+            <button id="prev-song" type="button" class="text-sm text-zinc-300 hover:text-white px-3 py-2 rounded-lg border border-zinc-700">⏮ Sebelumnya</button>
+            <button id="next-song" type="button" class="text-sm text-zinc-300 hover:text-white px-3 py-2 rounded-lg border border-zinc-700">Berikutnya ⏭</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Daftar game -->
+    <div class="reveal d2 bg-zinc-900 dark:bg-zinc-800 rounded-3xl p-7 mt-6">
+      <p class="font-display font-bold text-white mb-4">Game lain yang saya suka</p>
+      <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-4">
+        <figure class="card-h group"><div class="pf aspect-[3/4] rounded-xl border border-zinc-700 group-hover:border-accent transition-colors" data-label="Grand Theft Auto V"><img src="foto/Grand_Theft_Auto_V.png" alt="Grand Theft Auto V" loading="lazy" onerror="this.parentElement.classList.add('noimg');this.remove()"></div><figcaption class="mt-2 text-xs text-zinc-400 leading-snug">Grand Theft Auto V</figcaption></figure>
+        <figure class="card-h group"><div class="pf aspect-[3/4] rounded-xl border border-zinc-700 group-hover:border-accent transition-colors" data-label="Minecraft"><img src="foto/minecraft.avif" alt="Minecraft" loading="lazy" onerror="this.parentElement.classList.add('noimg');this.remove()"></div><figcaption class="mt-2 text-xs text-zinc-400 leading-snug">Minecraft</figcaption></figure>
+        <figure class="card-h group"><div class="pf aspect-[3/4] rounded-xl border border-zinc-700 group-hover:border-accent transition-colors" data-label="Roblox"><img src="foto/Roblox.jpg" alt="Roblox" loading="lazy" onerror="this.parentElement.classList.add('noimg');this.remove()"></div><figcaption class="mt-2 text-xs text-zinc-400 leading-snug">Roblox</figcaption></figure>
+        <figure class="card-h group"><div class="pf aspect-[3/4] rounded-xl border border-zinc-700 group-hover:border-accent transition-colors" data-label="Dying Light: The Beast"><img src="foto/Dying%20Light%20The%20Beast.jpg" alt="Dying Light: The Beast" loading="lazy" onerror="this.parentElement.classList.add('noimg');this.remove()"></div><figcaption class="mt-2 text-xs text-zinc-400 leading-snug">Dying Light: The Beast</figcaption></figure>
+        <figure class="card-h group"><div class="pf aspect-[3/4] rounded-xl border border-zinc-700 group-hover:border-accent transition-colors" data-label="Dying Light 2 Stay Human"><img src="foto/Dying%20Light%202%20Stay%20Humann.jpg" alt="Dying Light 2 Stay Human" loading="lazy" onerror="this.parentElement.classList.add('noimg');this.remove()"></div><figcaption class="mt-2 text-xs text-zinc-400 leading-snug">Dying Light 2 Stay Human</figcaption></figure>
+        <figure class="card-h group"><div class="pf aspect-[3/4] rounded-xl border border-zinc-700 group-hover:border-accent transition-colors" data-label="The Last of Us Part II Remastered"><img src="foto/Tlou%202.jpg" alt="The Last of Us Part II Remastered" loading="lazy" onerror="this.parentElement.classList.add('noimg');this.remove()"></div><figcaption class="mt-2 text-xs text-zinc-400 leading-snug">The Last of Us Part II Remastered</figcaption></figure>
+        <figure class="card-h group"><div class="pf aspect-[3/4] rounded-xl border border-zinc-700 group-hover:border-accent transition-colors" data-label="Dying Light"><img src="foto/Dying_Light.jpg" alt="Dying Light" loading="lazy" onerror="this.parentElement.classList.add('noimg');this.remove()"></div><figcaption class="mt-2 text-xs text-zinc-400 leading-snug">Dying Light</figcaption></figure>
+        <figure class="card-h group"><div class="pf aspect-[3/4] rounded-xl border border-zinc-700 group-hover:border-accent transition-colors" data-label="The Last of Us Part I"><img src="foto/Tlou.webp" alt="The Last of Us Part I" loading="lazy" onerror="this.parentElement.classList.add('noimg');this.remove()"></div><figcaption class="mt-2 text-xs text-zinc-400 leading-snug">The Last of Us Part I</figcaption></figure>
+      </div>
+    </div>
+
+    <!-- Daftar lagu -->
+    <div id="song-list" class="reveal d3 grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-6"></div>
+  </div>
+</section>
+
+<section id="kontak" class="py-24">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="bg-zinc-900 dark:bg-zinc-800 rounded-3xl p-10 md:p-16 relative overflow-hidden">
+      <div class="absolute top-0 right-0 w-64 h-64 bg-accent/20 rounded-full blur-3xl pointer-events-none" aria-hidden="true"></div>
+      <div class="relative z-10 grid md:grid-cols-2 gap-12 items-start">
+        <div>
+          <p class="reveal text-xs font-medium text-accent tracking-widest uppercase mb-3">Kontak</p>
+          <h2 class="reveal d1 font-display font-bold text-4xl md:text-5xl text-white leading-tight mb-5">Mari<br>terhubung</h2>
+          <p class="reveal d2 text-zinc-400 leading-relaxed mb-8">Hubungi saya untuk kesempatan magang, proyek, atau sekadar berdiskusi tentang jaringan dan teknologi.</p>
+          <div class="reveal d3 flex flex-col gap-4">
+            <a data-link="email" href="#" class="group flex items-center gap-3 text-zinc-400 hover:text-white transition-colors">
+              <span class="w-9 h-9 flex items-center justify-center bg-zinc-800 rounded-lg group-hover:bg-accent/20 transition-colors shrink-0" aria-label="Email"><svg class="w-5 h-5 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M3 7.5A2.5 2.5 0 015.5 5h13A2.5 2.5 0 0121 7.5v9a2.5 2.5 0 01-2.5 2.5h-13A2.5 2.5 0 013 16.5v-9z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="m4 7 8 6 8-6"/></svg></span>
+              <span class="text-sm" data-text="email"></span>
+            </a>
+            <a data-link="linkedin" href="#" class="group flex items-center gap-3 text-zinc-400 hover:text-white transition-colors">
+              <span class="w-9 h-9 flex items-center justify-center bg-zinc-800 rounded-lg group-hover:bg-accent/20 transition-colors shrink-0"><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg></span>
+              <span class="text-sm" data-text="linkedin"></span>
+            </a>
+            <a data-link="github" href="#" class="group flex items-center gap-3 text-zinc-400 hover:text-white transition-colors">
+              <span class="w-9 h-9 flex items-center justify-center bg-zinc-800 rounded-lg group-hover:bg-accent/20 transition-colors shrink-0"><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg></span>
+              <span class="text-sm" data-text="github"></span>
+            </a>
+          </div>
+        </div>
+        <div class="reveal d2">
+          <form id="contact-form" novalidate>
+            <div class="flex flex-col gap-4">
+              <div class="grid sm:grid-cols-2 gap-4">
+                <div><label for="fname" class="block text-xs font-medium text-zinc-400 mb-1.5">Nama *</label>
+                  <input type="text" id="fname" required autocomplete="name" placeholder="Nama kamu" class="w-full bg-zinc-800 border border-zinc-700 text-white text-sm rounded-xl px-4 py-3 placeholder-zinc-600 focus:outline-none focus:border-accent transition-colors"></div>
+                <div><label for="fsubject" class="block text-xs font-medium text-zinc-400 mb-1.5">Subjek</label>
+                  <input type="text" id="fsubject" placeholder="Tawaran magang" class="w-full bg-zinc-800 border border-zinc-700 text-white text-sm rounded-xl px-4 py-3 placeholder-zinc-600 focus:outline-none focus:border-accent transition-colors"></div>
+              </div>
+              <div><label for="fmessage" class="block text-xs font-medium text-zinc-400 mb-1.5">Pesan *</label>
+                <textarea id="fmessage" rows="4" required placeholder="Tulis pesan kamu..." class="w-full bg-zinc-800 border border-zinc-700 text-white text-sm rounded-xl px-4 py-3 placeholder-zinc-600 focus:outline-none focus:border-accent transition-colors resize-none"></textarea></div>
+              <button type="submit" class="shimmer w-full bg-accent text-white font-display font-bold text-sm py-3.5 rounded-xl hover:bg-accent-light transition-colors">Kirim lewat email</button>
+              <p class="text-xs text-zinc-500">Tombol ini membuka aplikasi email kamu dengan pesan yang sudah terisi.</p>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="border-t border-zinc-100 dark:border-zinc-900">
+  <div class="max-w-6xl mx-auto px-6 py-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+    <p class="text-sm text-zinc-400">© <span id="yr"></span> Ahmad Nadhif</p>
+    <div class="flex items-center gap-4">
+      <a data-footer-email href="#" aria-label="Kirim email" class="w-9 h-9 flex items-center justify-center rounded-full border border-zinc-200 dark:border-zinc-800 text-zinc-500 dark:text-zinc-400 hover:text-accent hover:border-accent transition-colors"><svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg></a>
+      <p class="text-xs text-zinc-500"> By Ahmad Nadhif</a></p>
+    </div>
+  </div>
+</footer>
+
+<script>
+// ===== GANTI DATA KONTAK DI SINI =====
+const CONTACT = {
+  email: 'ahmadnadhif211@gmail.com',
+  linkedin: 'https://www.linkedin.com/in/Intrinight',
+  github: 'https://github.com/nadhif-ctrl'
+};
+// =====================================
+
+// ===== DAFTAR LAGU FAVORIT (FILE MP3 LOKAL) =====
+const SONGS = [
+  { title: 'Backburner', artist: 'NIKI', audio: 'assets/audio/backburner-niki.mp3', cover: 'https://img.youtube.com/vi/BBpIV9A1PXc/hqdefault.jpg' },
+  { title: 'Hello Goodbye (Mill West Remix)', artist: 'YB & HEIAKIM', audio: 'assets/audio/hello-goodbye-remix.mp3', cover: 'https://img.youtube.com/vi/Re8hkxyMNvw/hqdefault.jpg' },
+  { title: 'Sick of Love', artist: 'LYORACHAY, BRIANVAL, MW ft. NAHMIER', audio: 'assets/audio/sick-of-love.mp3', cover: 'https://img.youtube.com/vi/MG-vZ7invAw/hqdefault.jpg' }
+];
+
+let currentSongIndex = -1;
+const audioPlayer = document.getElementById('local-audio-player');
+
+function highlightSong(card) {
+  document.querySelectorAll('.song-card').forEach(el => {
+    el.classList.remove('ring-2', 'ring-accent', 'border-accent');
+  });
+  if (card) card.classList.add('ring-2', 'ring-accent', 'border-accent');
+}
+
+function playSong(song, card) {
+  currentSongIndex = SONGS.indexOf(song);
+  document.getElementById('now-playing-title').textContent = song.title;
+  document.getElementById('now-playing-artist').textContent = song.artist;
+  document.getElementById('now-playing-image').src = song.cover;
+  audioPlayer.src = song.audio;
+  audioPlayer.load();
+  audioPlayer.play().catch(() => {
+    // Browser may require a fresh tap before starting audio.
+  });
+  highlightSong(card || document.querySelectorAll('.song-card')[currentSongIndex]);
+}
+
+function playSongAt(index) {
+  const nextIndex = (index + SONGS.length) % SONGS.length;
+  const cards = document.querySelectorAll('.song-card');
+  playSong(SONGS[nextIndex], cards[nextIndex]);
+}
+
+function renderSongs() {
+  const box = document.getElementById('song-list');
+  SONGS.forEach((song, i) => {
+    const card = document.createElement('button');
+    card.type = 'button';
+    card.className = 'song-card card-h group text-left flex items-center gap-4 bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 hover:border-accent rounded-2xl p-4 transition-all focus:outline-none focus:ring-2 focus:ring-accent';
+    card.setAttribute('aria-label', `Putar ${song.title}`);
+    const cover = document.createElement('div');
+    cover.className = 'relative w-20 h-20 shrink-0 rounded-xl overflow-hidden bg-zinc-200 dark:bg-zinc-700';
+    const img = document.createElement('img');
+    img.src = song.cover;
+    img.alt = `Cover ${song.title}`;
+    img.loading = 'lazy';
+    img.className = 'w-full h-full object-cover transition-transform duration-300 group-hover:scale-105';
+    img.onerror = () => { img.style.display = 'none'; };
+    const play = document.createElement('span');
+    play.className = 'absolute inset-0 flex items-center justify-center bg-black/25 text-white';
+    play.innerHTML = '<span class="w-10 h-10 rounded-full bg-accent flex items-center justify-center shadow-lg"><svg viewBox="0 0 24 24" class="w-5 h-5 fill-current ml-0.5" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span>';
+    cover.append(img, play);
+    const details = document.createElement('div');
+    details.className = 'min-w-0 flex-1';
+    const number = document.createElement('p');
+    number.className = 'text-[10px] uppercase tracking-widest text-accent mb-1';
+    number.textContent = `Favorit 0${i+1}`;
+    const name = document.createElement('p');
+    name.className = 'font-display font-bold text-zinc-900 dark:text-white truncate';
+    name.textContent = song.title;
+    const artist = document.createElement('p');
+    artist.className = 'text-sm text-zinc-500 dark:text-zinc-400 truncate mt-1';
+    artist.textContent = song.artist;
+    details.append(number, name, artist);
+    card.append(cover, details);
+    card.addEventListener('click', () => playSong(song, card));
+    box.append(card);
+  });
+}
+
+document.getElementById('prev-song').addEventListener('click', () => {
+  playSongAt(currentSongIndex <= 0 ? SONGS.length - 1 : currentSongIndex - 1);
+});
+document.getElementById('next-song').addEventListener('click', () => {
+  playSongAt(currentSongIndex < 0 ? 0 : currentSongIndex + 1);
+});
+audioPlayer.addEventListener('ended', () => {
+  if (currentSongIndex >= 0) playSongAt(currentSongIndex + 1);
+});
+
+function app() {
+  return {
+    dark: false, mm: false, sc: false, s: 'hero',
+    init() {
+      renderSongs();
+      this.dark = localStorage.getItem('theme') === 'dark' ||
+        (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches);
+      this.$watch('dark', v => localStorage.setItem('theme', v ? 'dark' : 'light'));
+      window.addEventListener('scroll', () => { this.sc = window.scrollY > 20; this.updateSection(); }, { passive: true });
+      const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+      document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+      document.getElementById('yr').textContent = new Date().getFullYear();
+
+      document.querySelector('[data-link=email]').href = 'mailto:' + CONTACT.email;
+      document.querySelector('[data-footer-email]').href = 'mailto:' + CONTACT.email;
+      document.querySelector('[data-text=email]').textContent = CONTACT.email;
+      for (const k of ['linkedin', 'github']) {
+        const a = document.querySelector('[data-link=' + k + ']');
+        a.href = CONTACT[k]; a.target = '_blank'; a.rel = 'noopener noreferrer';
+        document.querySelector('[data-text=' + k + ']').textContent = CONTACT[k].replace(/^https?:\/\/(www\.)?/, '');
+      }
+      document.getElementById('contact-form').addEventListener('submit', e => {
+        e.preventDefault();
+        const n = document.getElementById('fname').value.trim(), m = document.getElementById('fmessage').value.trim();
+        if (!n || !m) return;
+        const subj = document.getElementById('fsubject').value.trim() || 'Pesan dari website portofolio';
+        window.location.href = 'mailto:' + CONTACT.email + '?subject=' + encodeURIComponent(subj) + '&body=' + encodeURIComponent(m + '\n\n— ' + n);
+      });
+    },
+    updateSection() {
+      if ((window.innerHeight + window.scrollY) >= document.body.scrollHeight - 60) { this.s = 'kontak'; return; }
+      for (const id of ['kontak','favorite','pendidikan','tentang','pengalaman','keahlian','hero']) {
+        const el = document.getElementById(id);
+        if (el && window.scrollY >= el.offsetTop - 130) { this.s = id; return; }
+      }
+    }
+  }
+}
+</script>
+
+</body>
+</html>
